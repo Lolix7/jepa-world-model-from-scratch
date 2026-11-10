@@ -104,8 +104,26 @@ def init_encoder_params(obs_channels: int = 1, room_size: int = 8, latent_dim: i
 
     return params
 
-# Step 9 - encoder_forward (not yet solved)
-# TODO: implement
+# Step 9 - encoder_forward
+def encoder_forward(obs: torch.Tensor, encoder_params: dict) -> torch.Tensor:
+    # TODO: Run a small two-layer CNN that maps pixel observations to latent embeddings.
+    x = F.conv2d(
+        obs, encoder_params["conv1_w"], encoder_params["conv1_b"],
+        stride=1, padding=1
+    )
+    x = F.relu(x)
+
+    x = F.conv2d(
+        x, encoder_params["conv2_w"], encoder_params["conv2_b"],
+        stride=2, padding=1
+    )
+    x = F.relu(x)
+
+    x = x.flatten(start_dim=1)
+
+    x = F.linear(x, encoder_params["fc_w"], encoder_params["fc_b"])
+
+    return x
 
 # Step 10 - init_target_encoder (not yet solved)
 # TODO: implement
