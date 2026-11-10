@@ -13,7 +13,7 @@ python scaffold.py
 - [x] **1.** init_env_state
 - [x] **2.** apply_action
 - [x] **3.** render_observation
-- [ ] **4.** env_reset
+- [x] **4.** env_reset
 - [ ] **5.** env_step
 - [ ] **6.** collect_random_transitions
 - [ ] **7.** build_transition_dataset
