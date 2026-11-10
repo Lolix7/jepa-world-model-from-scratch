@@ -205,8 +205,10 @@ def vicreg_regularizer(embeddings: torch.Tensor, var_weight: float = 1.0, cov_we
     # TODO: Combine variance and covariance terms into the VICReg regularizer...
     return var_weight * variance_loss(embeddings, gamma) + cov_weight * covariance_loss(embeddings)
 
-# Step 21 - jepa_loss (not yet solved)
-# TODO: implement
+# Step 21 - jepa_loss
+def jepa_loss(predicted: torch.Tensor, target: torch.Tensor, online_embeddings: torch.Tensor, pred_weight: float = 1.0, var_weight: float = 1.0, cov_weight: float = 0.04) -> torch.Tensor:
+    # TODO: Compose the full JEPA objective from prediction and VICReg terms...
+    return pred_weight*prediction_loss(predicted, target) + vicreg_regularizer(online_embeddings, var_weight=var_weight, cov_weight=cov_weight)
 
 # Step 22 - collapse_metric (not yet solved)
 # TODO: implement
