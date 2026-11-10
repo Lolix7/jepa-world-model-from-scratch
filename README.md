@@ -32,7 +32,7 @@ python scaffold.py
 - [x] **20.** vicreg_regularizer
 - [x] **21.** jepa_loss
 - [x] **22.** collapse_metric
-- [ ] **23.** jepa_training_step
+- [x] **23.** jepa_training_step
 - [ ] **24.** train_jepa
 - [ ] **25.** rollout_latent_dynamics
 - [ ] **26.** multi_step_prediction_error

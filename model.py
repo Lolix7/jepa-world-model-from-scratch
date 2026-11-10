@@ -216,8 +216,32 @@ def collapse_metric(embeddings: torch.Tensor) -> torch.Tensor:
     std = embeddings.std(dim=0)
     return torch.mean(std)
 
-# Step 23 - jepa_training_step (not yet solved)
-# TODO: implement
+# Step 23 - jepa_training_step
+def jepa_training_step(batch: dict, encoder_params: dict, target_params: dict, predictor_params: dict, lr: float = 1e-3, tau: float = 0.99) -> tuple[dict, dict, dict, float, float]:
+    # TODO: Perform one full JEPA gradient update on a batch of transitions
+    online = encode_batch(batch['observations'], encoder_params)
+    target = encode_batch(batch['next_observations'], target_params)
+    predicted = predict_next_embedding(online, batch['actions'], predictor_params)
+    for p in list(encoder_params.values()) + list(predictor_params.values()):
+        p.grad = None
+    loss = jepa_loss(predicted, target, online)
+    loss.backward()
+
+    new_encode_params = {}
+    for key,value in encoder_params.item():
+        new_encode_params[key] = (value - lr * value.grad()).detach().requires_grad_()
+    
+    new_predict_params = {}
+    for key,value in predictor_params.item():
+        new_predict_params[key] = (value - lr * value.grad()).detach().requires_grad_()
+    
+    new_target_params = ema_update(target_params, new_encode_params, tau )
+
+
+    loss_value = loss.item()
+    col_val = collapse_metric(online.detach()).item()
+
+    return (new_encode_params, new_predict_params, new_target_params, loss_value, col_val)
 
 # Step 24 - train_jepa (not yet solved)
 # TODO: implement
