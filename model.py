@@ -80,8 +80,10 @@ def collect_random_transitions(num_transitions: int, room_size: int = 8, seed: i
         states=torch.stack(s) if s else torch.empty((0, 2))
     )
 
-# Step 7 - build_transition_dataset (not yet solved)
-# TODO: implement
+# Step 7 - build_transition_dataset
+def build_transition_dataset(num_transitions: int = 512, room_size: int = 8, seed: int = 0) -> dict:
+    # TODO: Build a JEPA training-ready transition dataset by collecting random transitions...
+    return collect_random_transitions(num_transitions,room_size,seed)
 
 # Step 8 - init_encoder_params (not yet solved)
 # TODO: implement
