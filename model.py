@@ -179,8 +179,10 @@ def predict_next_embedding(embeddings: torch.Tensor, actions: torch.Tensor, pred
     # TODO: Predict the next latent embedding given current embeddings and actions...
     return predictor_forward(embeddings,actions, predictor_params)
 
-# Step 17 - prediction_loss (not yet solved)
-# TODO: implement
+# Step 17 - prediction_loss
+def prediction_loss(predicted: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
+    # TODO: Compute the JEPA prediction loss as mean squared error...
+    return torch.mean((predicted-target)**2)
 
 # Step 18 - variance_loss (not yet solved)
 # TODO: implement

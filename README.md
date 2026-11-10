@@ -26,7 +26,7 @@ python scaffold.py
 - [x] **14.** embed_action
 - [x] **15.** predictor_forward
 - [x] **16.** predict_next_embedding
-- [ ] **17.** prediction_loss
+- [x] **17.** prediction_loss
 - [ ] **18.** variance_loss
 - [ ] **19.** covariance_loss
 - [ ] **20.** vicreg_regularizer
