@@ -17,7 +17,7 @@ python scaffold.py
 - [x] **5.** env_step
 - [x] **6.** collect_random_transitions
 - [x] **7.** build_transition_dataset
-- [ ] **8.** init_encoder_params
+- [x] **8.** init_encoder_params
 - [ ] **9.** encoder_forward
 - [ ] **10.** init_target_encoder
 - [ ] **11.** ema_update
