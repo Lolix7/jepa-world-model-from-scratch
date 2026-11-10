@@ -19,7 +19,7 @@ python scaffold.py
 - [x] **7.** build_transition_dataset
 - [x] **8.** init_encoder_params
 - [x] **9.** encoder_forward
-- [ ] **10.** init_target_encoder
+- [x] **10.** init_target_encoder
 - [ ] **11.** ema_update
 - [ ] **12.** encode_batch
 - [ ] **13.** init_predictor_params
