@@ -23,7 +23,7 @@ python scaffold.py
 - [x] **11.** ema_update
 - [x] **12.** encode_batch
 - [x] **13.** init_predictor_params
-- [ ] **14.** embed_action
+- [x] **14.** embed_action
 - [ ] **15.** predictor_forward
 - [ ] **16.** predict_next_embedding
 - [ ] **17.** prediction_loss
