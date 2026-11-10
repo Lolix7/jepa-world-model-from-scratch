@@ -141,8 +141,10 @@ def ema_update(target_params: dict, encoder_params: dict, tau: float = 0.99) -> 
         for key, value in encoder_params.items()
     }
 
-# Step 12 - encode_batch (not yet solved)
-# TODO: implement
+# Step 12 - encode_batch
+def encode_batch(obs: torch.Tensor, encoder_params: dict) -> torch.Tensor:
+    # TODO: Batch-encode observations into latent embeddings using encoder params.
+    return encoder_forward(obs, encoder_params)
 
 # Step 13 - init_predictor_params (not yet solved)
 # TODO: implement
