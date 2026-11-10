@@ -24,7 +24,7 @@ python scaffold.py
 - [x] **12.** encode_batch
 - [x] **13.** init_predictor_params
 - [x] **14.** embed_action
-- [ ] **15.** predictor_forward
+- [x] **15.** predictor_forward
 - [ ] **16.** predict_next_embedding
 - [ ] **17.** prediction_loss
 - [ ] **18.** variance_loss

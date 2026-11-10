@@ -164,8 +164,15 @@ def embed_action(actions: torch.Tensor, predictor_params: dict) -> torch.Tensor:
     # TODO: Embed discrete actions into continuous vectors via a learned action embedding table.
     return predictor_params['action_embed_w'][actions]
 
-# Step 15 - predictor_forward (not yet solved)
-# TODO: implement
+# Step 15 - predictor_forward
+def predictor_forward(embeddings: torch.Tensor, actions: torch.Tensor, predictor_params: dict) -> torch.Tensor:
+    # TODO: Implement predictor_forward, the forward pass of the action-conditioned dynamics predictor.
+    embed = embed_action(actions, predictor_params)
+    conc = torch.cat([embeddings, embed], dim=1)
+    h1 = torch.nn.functional.linear(conc, predictor_params['fc1_w'], predictor_params['fc1_b'])
+    z = torch.nn.functional.relu(h1)
+    h2 = torch.nn.functional.linear(z, predictor_params['fc2_w'], predictor_params['fc2_b'])
+    return h2
 
 # Step 16 - predict_next_embedding (not yet solved)
 # TODO: implement
