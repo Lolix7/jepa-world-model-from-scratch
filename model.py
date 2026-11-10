@@ -13,8 +13,21 @@ def init_env_state(room_size: int = 8, seed: int | None = None) -> torch.Tensor:
         torch.manual_seed(seed)
     return torch.randint(0,room_size,(2,)).float()
 
-# Step 2 - apply_action (not yet solved)
-# TODO: implement
+# Step 2 - apply_action
+def apply_action(state: torch.Tensor, action: int, room_size: int = 8) -> torch.Tensor:
+    # TODO: Apply a discrete action to the agent state with wall clamping.
+    s = state.clone()
+    if action == 0:
+        s[1] -= 1
+    elif action == 1:
+        s[1] += 1
+    elif action == 2:
+        s[0] -= 1
+    elif action == 3:
+        s[0] += 1
+    s[0] = min(room_size-1, max(0, s[0]) )
+    s[1] = min(room_size-1, max(0, s[1]) )
+    return s
 
 # Step 3 - render_observation (not yet solved)
 # TODO: implement

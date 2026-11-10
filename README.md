@@ -11,7 +11,7 @@ python scaffold.py
 ## Steps
 
 - [x] **1.** init_env_state
-- [ ] **2.** apply_action
+- [x] **2.** apply_action
 - [ ] **3.** render_observation
 - [ ] **4.** env_reset
 - [ ] **5.** env_step
