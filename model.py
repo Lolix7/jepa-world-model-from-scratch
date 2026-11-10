@@ -184,8 +184,11 @@ def prediction_loss(predicted: torch.Tensor, target: torch.Tensor) -> torch.Tens
     # TODO: Compute the JEPA prediction loss as mean squared error...
     return torch.mean((predicted-target)**2)
 
-# Step 18 - variance_loss (not yet solved)
-# TODO: implement
+# Step 18 - variance_loss
+def variance_loss(embeddings: torch.Tensor, gamma: float = 1.0, eps: float = 1e-4) -> torch.Tensor:
+    # TODO: Compute VICReg variance hinge loss encouraging each dim std >= gamma.
+    std = torch.sqrt(embeddings.var(dim=0) + eps)
+    return torch.mean(torch.relu(gamma-std))
 
 # Step 19 - covariance_loss (not yet solved)
 # TODO: implement

@@ -27,7 +27,7 @@ python scaffold.py
 - [x] **15.** predictor_forward
 - [x] **16.** predict_next_embedding
 - [x] **17.** prediction_loss
-- [ ] **18.** variance_loss
+- [x] **18.** variance_loss
 - [ ] **19.** covariance_loss
 - [ ] **20.** vicreg_regularizer
 - [ ] **21.** jepa_loss
