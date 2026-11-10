@@ -15,7 +15,7 @@ python scaffold.py
 - [x] **3.** render_observation
 - [x] **4.** env_reset
 - [x] **5.** env_step
-- [ ] **6.** collect_random_transitions
+- [x] **6.** collect_random_transitions
 - [ ] **7.** build_transition_dataset
 - [ ] **8.** init_encoder_params
 - [ ] **9.** encoder_forward
