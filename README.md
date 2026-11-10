@@ -29,7 +29,7 @@ python scaffold.py
 - [x] **17.** prediction_loss
 - [x] **18.** variance_loss
 - [x] **19.** covariance_loss
-- [ ] **20.** vicreg_regularizer
+- [x] **20.** vicreg_regularizer
 - [ ] **21.** jepa_loss
 - [ ] **22.** collapse_metric
 - [ ] **23.** jepa_training_step
