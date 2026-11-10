@@ -146,8 +146,18 @@ def encode_batch(obs: torch.Tensor, encoder_params: dict) -> torch.Tensor:
     # TODO: Batch-encode observations into latent embeddings using encoder params.
     return encoder_forward(obs, encoder_params)
 
-# Step 13 - init_predictor_params (not yet solved)
-# TODO: implement
+# Step 13 - init_predictor_params
+def init_predictor_params(latent_dim: int = 32, action_dim: int = 4, hidden_dim: int = 64, seed: int = 0) -> dict:
+    # TODO: Initialize and return a dict of MLP predictor parameters.
+    torch.manual_seed(seed)
+    params = {
+        'action_embed_w' : torch.randn((action_dim, latent_dim)).requires_grad_(True)*0.02,
+        'fc1_w' : torch.randn((hidden_dim, 2*latent_dim)).requires_grad_(True)*0.02,
+        'fc1_b' : torch.zeros(hidden_dim).requires_grad_(True),
+        'fc2_w' : torch.randn((latent_dim, hidden_dim)).requires_grad_(True)*0.02,
+        'fc2_b' : torch.zeros(latent_dim).requires_grad_(True),
+    }
+    return params
 
 # Step 14 - embed_action (not yet solved)
 # TODO: implement
