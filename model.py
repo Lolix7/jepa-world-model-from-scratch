@@ -268,8 +268,25 @@ def train_jepa(dataset: dict, encoder_params: dict, target_params: dict, predict
         history.append({'loss':loss_value, 'collapse':collapse_value})
     return encoder_params,target_params,predictor_params, history
 
-# Step 25 - rollout_latent_dynamics (not yet solved)
-# TODO: implement
+# Step 25 - rollout_latent_dynamics
+def rollout_latent_dynamics(initial_embedding: torch.Tensor, actions: torch.Tensor, predictor_params: dict) -> torch.Tensor:
+    # TODO: Roll out multi-step latent dynamics via the action-conditioned predictor...
+    batched = initial_embedding.dim() == 2
+
+    current = initial_embedding.unsqueeze(0) if not batched else initial_embedding
+
+    if actions.dim() == 1:
+        actions = actions.unsqueeze(0).expand(current.shape[0], -1)
+
+    init = [current]
+
+    for t in range(actions.shape[1]):
+        current = predict_next_embedding(current, actions[:, t], predictor_params)
+        init.append(current)
+
+    result = torch.stack(init, dim=0)
+
+    return result if batched else result.squeeze(1)
 
 # Step 26 - multi_step_prediction_error (not yet solved)
 # TODO: implement
