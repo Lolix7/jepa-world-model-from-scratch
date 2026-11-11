@@ -288,8 +288,60 @@ def rollout_latent_dynamics(initial_embedding: torch.Tensor, actions: torch.Tens
 
     return result if batched else result.squeeze(1)
 
-# Step 26 - multi_step_prediction_error (not yet solved)
-# TODO: implement
+# Step 26 - multi_step_prediction_error
+def multi_step_prediction_error(dataset: dict, encoder_params: dict, target_params: dict, predictor_params: dict, horizon: int = 5, num_samples: int = 32) -> float:
+    # TODO: Evaluate multi-step latent prediction accuracy via mean MSE over samples
+    obs = dataset['observations']
+    action = dataset['actions']
+    next_obs = dataset['next_observations']
+    N = obs.shape[0]
+    indices = list(range(min(num_samples, N - horizon)))
+
+    with torch.no_grad():
+
+        # Encode initial observations
+        initial_obs = obs[indices]
+        initial_embeddings = encode_batch(initial_obs, encoder_params)
+
+        # Gather action sequences: (B, T)
+        actions = torch.stack([
+            action[i:i+horizon] for i in indices
+        ])
+
+        # Predict future latent states: (T+1, B, D)
+        rollout = rollout_latent_dynamics(
+            initial_embeddings,
+            actions,
+            predictor_params
+        )
+
+        # Remove initial embedding: (T, B, D)
+        pred = rollout[1:]
+
+        # Gather true future observations: (B, T, C, H, W)
+        future_obs = torch.stack([
+            next_obs[i:i+horizon] for i in indices
+        ])
+
+        B, T = future_obs.shape[:2]
+
+        # Flatten batch and time for encoder
+        future_obs = future_obs.reshape(
+            B * T, *future_obs.shape[2:]
+        )
+
+        # Encode with EMA target encoder
+        true_embeddings = encode_batch(future_obs, target_params)
+
+        # Restore shape: (T, B, D)
+        true_embeddings = true_embeddings.reshape(
+            B, T, -1
+        ).transpose(0, 1)
+
+        # Mean squared error
+        error = ((pred - true_embeddings) ** 2).mean()
+
+    return error.item()
 
 # Step 27 - init_linear_probe (not yet solved)
 # TODO: implement
