@@ -371,8 +371,33 @@ def train_linear_probe(embeddings: torch.Tensor, states: torch.Tensor, probe_par
         b.grad.zero_()
     return {'w': w.detach().clone(), 'b': b.detach().clone()}
 
-# Step 29 - probe_state_recovery (not yet solved)
-# TODO: implement
+# Step 29 - probe_state_recovery
+def probe_state_recovery(dataset: dict, encoder_params: dict, probe_params: dict | None = None, num_probe_steps: int = 100) -> dict:
+    obs = dataset['observations']
+    states = dataset['states'].float()
+
+    with torch.no_grad():
+        X = encode_batch(obs, encoder_params)
+
+    if probe_params is None:
+        torch.manual_seed(0)
+        probe_params = init_linear_probe(latent_dim=X.shape[-1],
+                                         state_dim=states.shape[-1], seed=0)
+    # (state_dim, latent_dim) -> (latent_dim, state_dim) pour train_linear_probe
+    p = {'w': probe_params['w'].t().contiguous(), 'b': probe_params['b']}
+    out = train_linear_probe(X, states, p, num_steps=num_probe_steps)
+
+    # on remet w au format de init_linear_probe : (state_dim, latent_dim)
+    w = out['w'].t().contiguous()
+    b = out['b']
+    trained = {'w': w, 'b': b}
+
+    with torch.no_grad():
+        pred = X @ out['w'] + b          # même calcul que train_linear_probe
+        mse = torch.mean((pred - states) ** 2).item()
+        mae = torch.mean(torch.abs(pred - states)).item()
+
+    return {'mse': float(mse), 'mean_abs_error': float(mae), 'probe_params': trained}
 
 # Step 30 - encode_goal (not yet solved)
 # TODO: implement
