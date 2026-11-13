@@ -39,7 +39,7 @@ python scaffold.py
 - [x] **27.** init_linear_probe
 - [x] **28.** train_linear_probe
 - [x] **29.** probe_state_recovery
-- [ ] **30.** encode_goal
+- [x] **30.** encode_goal
 - [ ] **31.** latent_cost
 - [ ] **32.** sample_action_sequences
 - [ ] **33.** score_action_sequences

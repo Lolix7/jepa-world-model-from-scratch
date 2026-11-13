@@ -400,8 +400,14 @@ def probe_state_recovery(dataset: dict, encoder_params: dict, probe_params: dict
 
     return {'mse': float(mse), 'mean_abs_error': float(mae), 'probe_params': trained}
 
-# Step 30 - encode_goal (not yet solved)
-# TODO: implement
+# Step 30 - encode_goal
+def encode_goal(goal_state: torch.Tensor, encoder_params: dict, room_size: int = 8) -> torch.Tensor:
+    # TODO: Convert a desired agent position into a latent goal embedding.
+    box = render_observation(goal_state,room_size).unsqueeze(0)
+    
+    x = encoder_forward(box, encoder_params)
+    
+    return x.squeeze(0)
 
 # Step 31 - latent_cost (not yet solved)
 # TODO: implement
