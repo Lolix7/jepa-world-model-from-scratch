@@ -47,7 +47,7 @@ python scaffold.py
 - [x] **35.** mpc_step
 - [x] **36.** run_mpc_episode
 - [x] **37.** evaluate_planner
-- [ ] **38.** jepa_world_model_experiment
+- [x] **38.** jepa_world_model_experiment
 
 ---
 
