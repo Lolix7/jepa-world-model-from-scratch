@@ -37,7 +37,7 @@ python scaffold.py
 - [x] **25.** rollout_latent_dynamics
 - [x] **26.** multi_step_prediction_error
 - [x] **27.** init_linear_probe
-- [ ] **28.** train_linear_probe
+- [x] **28.** train_linear_probe
 - [ ] **29.** probe_state_recovery
 - [ ] **30.** encode_goal
 - [ ] **31.** latent_cost
