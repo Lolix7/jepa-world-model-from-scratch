@@ -435,8 +435,11 @@ def score_action_sequences(start_embedding, action_sequences, goal_embedding, pr
 
     return scores
 
-# Step 34 - select_best_plan (not yet solved)
-# TODO: implement
+# Step 34 - select_best_plan
+def select_best_plan(action_sequences, costs):
+    # TODO: Return the action sequence with the lowest cost from the candidates.
+    i = torch.argmin(costs)
+    return action_sequences[i]
 
 # Step 35 - mpc_step (not yet solved)
 # TODO: implement

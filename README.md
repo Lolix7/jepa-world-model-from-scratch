@@ -43,7 +43,7 @@ python scaffold.py
 - [x] **31.** latent_cost
 - [x] **32.** sample_action_sequences
 - [x] **33.** score_action_sequences
-- [ ] **34.** select_best_plan
+- [x] **34.** select_best_plan
 - [ ] **35.** mpc_step
 - [ ] **36.** run_mpc_episode
 - [ ] **37.** evaluate_planner
